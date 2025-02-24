@@ -1,0 +1,3 @@
+﻿  Main.cpp
+C:\Users\beard\source\repos\NMB.MathQuiz\NMB.MathQuiz\Main.cpp(35,13): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  NMB.MathQuiz.vcxproj -> C:\Users\beard\source\repos\NMB.MathQuiz\x64\Debug\NMB.MathQuiz.exe
