@@ -1,4 +1,3 @@
-
 // Math Quiz
 // Nathan Beardslee
 
@@ -12,29 +11,37 @@ using namespace std;
 
 int main()
 {
-	// creating filePath and line variables to use for input and output 
-	string filePath = "QuizResults.txt";
+	// creating filePaths and line variables to use for input and output for answers and input of the questions.
+	string afilePath = "QuizResults.txt";
+	string qfilePath = "questions.txt";
 	string line;	
 
 
-	
 
 	cout << "Welcome to Math Quiz!";
 
-	vector<string> questions = {
-		"1 + 1 =",
-		"4 / 2 =",
-		"3 * 5 =",
-		"7 - 4 =",
-		"5 + 5 =",
-		"6 / 3 =",
-		"10 * 2 =",
-		"8 + 8 =",
-		"9 - 9 =",
-		"10 / 10 ="
-	};
+
+	vector<string> questions;
+
 	vector<int> answers = { 2, 2, 15, 3, 10, 2, 20, 16, 0, 1 };
+
 	vector<string> results;
+
+
+// Open the questions file and read its contents into the questions vector
+ifstream qesFile(qfilePath);
+
+if (!qesFile)
+{
+cout << "Error opening selected file.\n";
+return 1;
+}
+
+while (getline(qesFile, line))
+{
+questions.push_back(line);
+}
+qesFile.close();
 
 
 	for (int i = 0; i < 3; i++)
@@ -59,29 +66,28 @@ int main()
 
 		results.push_back(question + " " + to_string(answer) + ": ");
 	}
-	
 
 	// Save results to file
-	ofstream ofs(filePath);
+	ofstream ofs(afilePath);
 	if (ofs)
 	{
-for (const string& result : results)
-	{
-		ofs << result << "\n";
-	}
+		for (const string& result : results)
+		{
+			ofs << result << "\n";
+		}
 		ofs.close();
-		cout << "Results saved to " << filePath << "\n";
+		cout << "Results saved to " << afilePath << "\n";
 	}
 	else
 	{
 		cout << "Error opening file for writing.\n";
 		return 1;
 	}
-	// reaad results for file
-	ifstream ifs(filePath);
+	// read results from file
+	ifstream ifs(afilePath);
 	if (ifs)
 	{
-		cout << "Reading results from " << filePath << ":\n";
+		cout << "Reading results from " << afilePath << ":\n";
 		while (getline(ifs, line))
 		{
 			cout << line << "\n";
@@ -93,7 +99,6 @@ for (const string& result : results)
 		cout << "Error opening file for reading.\n";
 		return 1;
 	}
-
 
 	(void)_getch();
 	return 0;
